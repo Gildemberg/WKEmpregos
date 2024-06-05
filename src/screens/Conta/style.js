@@ -17,15 +17,16 @@ const styles = StyleSheet.create({
     button: {
         padding: 10,
         borderWidth: 1,
-        borderColor: '#F60',
+        borderColor: '#070A52',
         borderRadius: 10,
         marginBottom: 20,
-        width: '100%'
+        width: '100%',
+        backgroundColor: '#070A52'
     },
     textButton: {
         fontSize: 18,
         textAlign: 'center',
-        color: '#F60'
+        color: '#fff'
     }
 })
 

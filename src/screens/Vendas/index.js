@@ -70,10 +70,9 @@ export default function Vendas({ navigation }) {
                     <View style={styles.tarefa}>
                         <View>
                             <Text style={styles.data}>{item.dataVenda}</Text>
-                            <Text style={styles.descricao}>{item.marca}</Text>
-                            <Text style={styles.descricao}>{item.modelo}</Text>
-                            <Text style={styles.descricao}>{item.ano}</Text>
-                            <Text style={styles.descricao}>{item.valor}</Text>
+                            <Text style={styles.descricao}>Veículo:</Text>
+                            <Text style={styles.descricao}>{item.marca} - {item.modelo} - {item.ano}</Text>
+                            <Text style={styles.valorVenda}>R$ {item.valor}</Text>
                         </View>
                         <View style={styles.action}>
                             <TouchableOpacity

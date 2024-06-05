@@ -21,7 +21,7 @@ export default function App() {
                 screenOptions={{
                     headerTintColor: '#FFF',
                     headerTitleAlign: 'center',
-                    headerStyle: { backgroundColor: '#F60' }
+                    headerStyle: { backgroundColor: '#070A52' }
                 }}
             >
                 <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
@@ -43,29 +43,32 @@ function Tabs() {
     return (
         <Tab.Navigator
             screenOptions={{
-                tabBarActiveTintColor: "#FFF", //Cor de ícones ativos
-                tabBarInactiveTintColor: "#F60", //Cor de ícones inativos
-                tabBarActiveBackgroundColor: '#F60',
+                tabBarActiveTintColor: "#fff", //Cor de ícones ativos
+                tabBarInactiveTintColor: "#fff", //Cor de ícones inativos
+                tabBarActiveBackgroundColor: '#4169E1',
                 tabBarShowLabel: true,
                 tabBarStyle: { backgroundColor: '#070A52' },
                 headerShown: true,
                 headerTintColor: '#FFF',
                 headerTitleAlign: 'center',
-                headerStyle: { backgroundColor: '#F60' }
+                headerStyle: { backgroundColor: '#070A52' }
             }}
         >
-            <Tab.Screen name="Vendas" component={Vendas}
-                options={{
-                    tabBarIcon: ({ color }) => (
-                        <MaterialCommunityIcons name="check-circle-outline" color={color} size={32} />
-                    ),
-                }}
-            />
+            
             <Tab.Screen name="Conta" component={Conta}
                 options={{
                     tabBarIcon: ({ color }) => (
                         <MaterialCommunityIcons name="account" color={color} size={32} />
                     ),
+                    tabBarLabel: () => null
+                }}
+            />
+            <Tab.Screen name="Vendas" component={Vendas}
+                options={{
+                    tabBarIcon: ({ color }) => (
+                        <MaterialCommunityIcons name="format-list-text" color={color} size={32} />
+                    ),
+                    tabBarLabel: () => null
                 }}
             />
             <Tab.Screen name="Sobre" component={Sobre}
@@ -73,6 +76,7 @@ function Tabs() {
                     tabBarIcon: ({ color }) => (
                         <MaterialCommunityIcons name="information-outline" color={color} size={32} />
                     ),
+                    tabBarLabel: () => null
                 }}
             />
         </Tab.Navigator>

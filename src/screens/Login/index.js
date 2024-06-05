@@ -82,7 +82,7 @@ export default function Login({ navigation }) {
 
             <TouchableOpacity
                 style={styles.buttonCreate}
-                onPress={() => navigation.navigate('CreateUser')}
+                onPress={() => navigation.navigate('CriarUsuario')}
             >
                 <Text style={styles.buttonCreateText}>Criar Usuário</Text>
             </TouchableOpacity>

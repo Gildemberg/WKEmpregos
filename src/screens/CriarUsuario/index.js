@@ -6,7 +6,7 @@ import styles from './style'
 import { getDatabase, ref, set } from 'firebase/database'
 const db = getDatabase();
 
-export default function CreateUser({navigation}) {
+export default function CriarUsuario({navigation}) {
     const [nome, setNome] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -21,11 +21,11 @@ export default function CreateUser({navigation}) {
             setErroCreateUser("informe a sua senha")
         } else {
             setErroCreateUser(null)
-            createUser();
+            criarUsuario();
         }
     }
 
-    const createUser = () => {
+    const criarUsuario = () => {
         const auth = getAuth();
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {

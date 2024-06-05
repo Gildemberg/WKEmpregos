@@ -16,10 +16,16 @@ export default function CreateTask({ navigation }) {
     const [errorCadastrarVenda, setErrorCadastrarVenda] = useState(null)
 
     const validar = () => {
-        if (date == "") {
-            setErrorCadastrarVenda("Informe a data da tarefa")
-        } else if (description == "") {
-            setErrorCadastrarVenda("Informe a descrição da tareja")
+        if (dataVenda == "") {
+            setErrorCadastrarVenda("Informe a data da venda")
+        } else if (marca == "") {
+            setErrorCadastrarVenda("Informe a marca do veiculo")
+        } else if (modelo == "") {
+            setErrorCadastrarVenda("Informe o modelo do veiculo")
+        } else if (ano == "") {
+            setErrorCadastrarVenda("Informe o ano do veiculo")
+        } else if (valor == "") {
+            setErrorCadastrarVenda("Informe o valor da venda")
         } else {
             setErrorCadastrarVenda(null)
             cadastrarVenda()

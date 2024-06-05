@@ -3,11 +3,12 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
     container: {
         padding: 20,
-        flex: 1
+        flex: 1,
+        backgroundColor: '#ddd'
     },
 
     tarefa: {
-        backgroundColor: "#DDD",
+        backgroundColor: "#4169E1",
         marginBottom: 10,
         padding: 10,
         borderRadius: 10,
@@ -22,15 +23,21 @@ const styles = StyleSheet.create({
     },
 
     data: {
-        color: '#F60'
+        color: '#fff'
     },
 
     descricao: {
-        fontSize: 18
+        fontSize: 18,
+    },
+    
+    valorVenda: {
+        fontSize: 18,
+        color: '#fff',
+        fontWeight: 'bold'
     },
 
     buttonCreate: {
-        backgroundColor: '#F60',
+        backgroundColor: '#070A52',
         width: 60,
         height: 60,
         borderRadius: 50,
