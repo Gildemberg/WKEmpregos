@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react';
+import { Text, TextInput, View, TouchableOpacity, Image } from 'react-native';
+import styles from './style';
 import { firebase } from '../../services/firebaseConfig'
-import { getAuth, onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth'
-import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native'
-import styles from './style'
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import Logo from '../../../assets/logo.jpg';
+
 
 export default function Login({ navigation }) {
     const [email, setEmail] = useState("")
@@ -37,24 +39,9 @@ export default function Login({ navigation }) {
             });
     }
 
-    const verificarLogin = () => {
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                const uid = user.uid;
-                navigation.navigate('Tabs');
-            } else {
-            }
-        });
-    }
-
-    useEffect(() => {
-        verificarLogin();
-    }, [])
-
     return (
         <View style={styles.container}>
-            <Image style={styles.logo} source={require('../../../assets/logo_pra_fazer.png')} />
-
+            <Image source={{ uri: 'https://images.vexels.com/media/users/3/147726/isolated/preview/3c35c23c922833a71a94e7d5faf28b88-logotipo-do-servico-de-venda-de-carros.png'}} style={styles.logo} />
             {errorLogin != null && (
                 <Text style={styles.alert}>{errorLogin}</Text>
             )}

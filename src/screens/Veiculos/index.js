@@ -1,36 +1,18 @@
-import { View, Text, TouchableOpacity, FlatList, Modal, Pressable, Alert } from 'react-native'
+import { View, Text, TouchableOpacity, FlatList, Modal, Pressable, Alert, Image } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import styles from './style'
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { firebase } from '../../services/firebaseConfig'
-import { getDatabase, onValue, orderByChild, query, ref, remove } from "firebase/database";
+import { getDatabase, onValue, query, ref, orderByChild } from "firebase/database";
 import { getAuth } from "firebase/auth";
 const db = getDatabase();
 const auth = getAuth();
 
-export default function Vendas({ navigation }) {
+export default function Veiculos({ navigation }) {
     const [vendas, setVendas] = useState([]);
     const [modalVisible, setModalVisible] = useState(false);
 
-    const deletarVenda = (id) => {
-        return Alert.alert(
-            "Excluir venda",
-            "Você tem certeza que deseja remover essa venda?",
-            [
-                {
-                    text: "Cancelar",
-                },
-                {
-                    text: "Confirmar",
-                    // Função que remove tarefa do banco quando o usuário clica na opção "Confirmar" do popup
-                    onPress: () => remove(ref(db, 'vendas/' + auth.currentUser.uid + '/' + id))
-                }
-            ]
-        );
-    };
-
     useEffect(() => {
-        const listaVendas = query(ref(db, 'vendas/' + auth.currentUser.uid));
+        const listaVendas = query(ref(db, 'vendas/' + auth.currentUser.uid), orderByChild('status'));
         onValue(listaVendas, (snapshot) => {
             const lista = []
             snapshot.forEach((data) => {
@@ -67,32 +49,24 @@ export default function Vendas({ navigation }) {
                 showsVerticalScrollIndicator={false}
                 data={vendas}
                 renderItem={({ item }) =>
-                    <View style={styles.tarefa}>
+                    <TouchableOpacity style={styles.tarefa} onPress={() => navigation.navigate('InfoVeiculo', { id: item.id })} >
                         <View>
+                            {item.urlImage ? <Image source={{ uri: item.urlImage }} style={styles.imagem} /> : null}
+                        </View>
+                        <View style={styles.box}>
                             <Text style={styles.data}>{item.dataVenda}</Text>
-                            <Text style={styles.descricao}>Veículo:</Text>
                             <Text style={styles.descricao}>{item.marca} - {item.modelo} - {item.ano}</Text>
                             <Text style={styles.valorVenda}>R$ {item.valor}</Text>
+                            <Text style={[styles.status, item.status==='Vendido' && styles.disp]}>{item.status}</Text>
+                            
                         </View>
-                        <View style={styles.action}>
-                            <TouchableOpacity
-                                onPress={() => navigation.navigate('EditarVenda', { id: item.id })}
-                            >
-                                <Text style={styles.descricao}><MaterialCommunityIcons name="file-document-edit-outline" size={32} /></Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                                onPress={() => deletarVenda(item.id)}
-                            >
-                                <Text style={styles.descricao}><MaterialCommunityIcons name="delete-outline" size={32} /></Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
+                    </TouchableOpacity>
                 }
             />
 
             <TouchableOpacity
                 style={styles.buttonCreate}
-                onPress={() => navigation.navigate('CadastrarVenda')}
+                onPress={() => navigation.navigate('CadastrarVeiculo')}
             >
                 <Text style={styles.textButtonCreate}>+</Text>
             </TouchableOpacity>

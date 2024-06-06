@@ -4,11 +4,12 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Login from './src/screens/Login'
 import CriarUsuario from './src/screens/CriarUsuario'
-import CadastrarVenda from './src/screens/CadastrarVenda'
-import EditarVenda from './src/screens/EditarVenda'
-import Vendas from './src/screens/Vendas';
+import CadastrarVeiculo from './src/screens/CadastrarVeiculo'
+import EditarVeiculo from './src/screens/EditarVeiculo'
 import Sobre from './src/screens/Sobre';
 import Conta from './src/screens/Conta';
+import Veiculos from "./src/screens/Veiculos";
+import InfoVeiculo from "./src/screens/InfoVeiculo";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -28,9 +29,11 @@ export default function App() {
 
                 <Stack.Screen name="CriarUsuario" component={CriarUsuario} options={{ title: 'Cadastro de Usuário'}} />
 
-                <Stack.Screen name="CadastrarVenda" component={CadastrarVenda} options={{ title: 'Cadastro de Venda'}} />
+                <Stack.Screen name="CadastrarVeiculo" component={CadastrarVeiculo} options={{ title: 'Cadastro de Veículos'}} />
 
-                <Stack.Screen name="EditarVenda" component={EditarVenda} options={{ title: 'Editar Venda'}} />
+                <Stack.Screen name="EditarVeiculo" component={EditarVeiculo} options={{ title: 'Editar Veículo'}} />
+
+                <Stack.Screen name="InfoVeiculo" component={InfoVeiculo} options={{ title: 'Veículo'}} />
 
                 <Stack.Screen name="Tabs" component={Tabs} options={{ headerShown: false }} />
 
@@ -54,6 +57,14 @@ function Tabs() {
                 headerStyle: { backgroundColor: '#070A52' }
             }}
         >
+            <Tab.Screen name="Veículos" component={Veiculos}
+                options={{
+                    tabBarIcon: ({ color }) => (
+                        <MaterialCommunityIcons name="car-back" color={color} size={32} />
+                    ),
+                    tabBarLabel: () => null
+                }}
+            />
             
             <Tab.Screen name="Conta" component={Conta}
                 options={{
@@ -63,22 +74,15 @@ function Tabs() {
                     tabBarLabel: () => null
                 }}
             />
-            <Tab.Screen name="Vendas" component={Vendas}
-                options={{
-                    tabBarIcon: ({ color }) => (
-                        <MaterialCommunityIcons name="format-list-text" color={color} size={32} />
-                    ),
-                    tabBarLabel: () => null
-                }}
-            />
-            <Tab.Screen name="Sobre" component={Sobre}
+            
+            {/* <Tab.Screen name="Sobre" component={Sobre}
                 options={{
                     tabBarIcon: ({ color }) => (
                         <MaterialCommunityIcons name="information-outline" color={color} size={32} />
                     ),
                     tabBarLabel: () => null
                 }}
-            />
+            /> */}
         </Tab.Navigator>
     );
 }

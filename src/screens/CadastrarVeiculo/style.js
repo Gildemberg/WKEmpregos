@@ -34,6 +34,11 @@ const styles = StyleSheet.create({
         fontSize: 24,
         textAlign: 'center',
         color: '#fff'
+    },
+    imagemSelecionada: {
+        width: 350, 
+        height: 200,
+        marginBottom: 20
     }
 });
 
