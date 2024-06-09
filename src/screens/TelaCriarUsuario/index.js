@@ -1,12 +1,13 @@
-import React, { useState } from 'react'
-import { firebase } from '../../services/firebaseConfig'
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { View, Text, TextInput, TouchableOpacity } from 'react-native'
 import styles from './style'
+import React, { useState } from 'react'
+
+import { firebase } from '../../services/firebaseConfig'
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { getDatabase, ref, set } from 'firebase/database'
 const db = getDatabase();
 
-export default function CriarUsuario({navigation}) {
+export default function TelaCriarUsuario({navigation}) {
     const [nome, setNome] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")

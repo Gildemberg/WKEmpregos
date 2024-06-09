@@ -24,7 +24,7 @@ export default function Account({ navigation }) {
 
     const logoff = () => {
         signOut(auth).then(() => {
-            navigation.navigate('Login')
+            navigation.navigate('TelaLogin')
         }).catch((error) => {
             // An error happened.
         });

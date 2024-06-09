@@ -1,15 +1,14 @@
-import React, { useState } from 'react';
 import { Text, TextInput, View, TouchableOpacity, Image } from 'react-native';
 import styles from './style';
+import React, { useState } from 'react';
 import { firebase } from '../../services/firebaseConfig'
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import Logo from '../../../assets/logo.jpg';
 
-
-export default function Login({ navigation }) {
+export default function TelaLogin({ navigation }) {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [errorLogin, setErrorLogin] = useState(null)
+    const auth = getAuth();
 
     const validate = () => {
         if (email == "") {
@@ -22,7 +21,6 @@ export default function Login({ navigation }) {
         }
     }
 
-    const auth = getAuth();
     const login = () => {
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
@@ -41,7 +39,7 @@ export default function Login({ navigation }) {
 
     return (
         <View style={styles.container}>
-            <Image source={{ uri: 'https://images.vexels.com/media/users/3/147726/isolated/preview/3c35c23c922833a71a94e7d5faf28b88-logotipo-do-servico-de-venda-de-carros.png'}} style={styles.logo} />
+            <Image source={require('../../../assets/logo.jpg')} style={styles.logo} />
             {errorLogin != null && (
                 <Text style={styles.alert}>{errorLogin}</Text>
             )}
@@ -69,7 +67,7 @@ export default function Login({ navigation }) {
 
             <TouchableOpacity
                 style={styles.buttonCreate}
-                onPress={() => navigation.navigate('CriarUsuario')}
+                onPress={() => navigation.navigate('TelaCriarUsuario')}
             >
                 <Text style={styles.buttonCreateText}>Criar Usuário</Text>
             </TouchableOpacity>

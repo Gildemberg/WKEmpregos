@@ -4,13 +4,12 @@ const styles = StyleSheet.create({
     container: {
         padding: 20,
         flex: 1,
-        backgroundColor: '#fff'
+        backgroundColor: '#483D8B'
     },
 
-    tarefa: {
+    vaga: {
         backgroundColor: "#ddd",
         marginBottom: 10,
-        padding: 10,
         borderRadius: 10,
         flexDirection: 'row',
         alignItems: 'center',
@@ -18,66 +17,63 @@ const styles = StyleSheet.create({
         gap: 10,
     },
 
-    action: {
-        flexDirection: 'row'
+    box : {
+        width: '100%',
     },
 
-    data: {
-        color: '#000',
-        textAlign: 'right',
-        marginBottom: 10,
-
+    box2 : {
+        width: '100%',
+        padding: 10,
     },
 
-    descricao: {
+    empresa: {
+        fontSize: 20,
+        textAlign: 'center'
+    },
+
+    funcao: {
         fontSize: 18,
     },
     
-    valorVenda: {
+    salario: {
         fontSize: 18,
         fontWeight: 'bold'
-    },
-
-    buttonCreate: {
-        backgroundColor: '#070A52',
-        width: 60,
-        height: 60,
-        borderRadius: 50,
-        position: 'absolute',
-        bottom: 20,
-        right: 20,
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-
-    textButtonCreate: {
-        fontSize: 24,
-        textAlign: 'center',
-        color: '#fff'
-    },
-
-    cancel: {
-        color: '#F00'
-    },
-
-    imagem: {
-        width: 150, 
-        height: 100, 
-        borderRadius: 5
-    },
-
-    box : {
-        width: 220
-    },
-
-    disp: {
-        color: 'red',
     },
 
     status: {
         color: 'green',
         textAlign: 'right'
     },
+
+    barraStatus: {
+        width: '100%',
+        backgroundColor: 'green',
+        height: 10,
+        borderBottomEndRadius:10,
+        borderBottomStartRadius: 10
+    },
+    
+    barraStatusDisp: {
+        backgroundColor: 'red',
+    },
+
+    buttonCreate: {
+        backgroundColor: '#2E8B57',
+        width: 300,
+        height: 30,
+        borderRadius: 50,
+        position: 'absolute',
+        bottom: 20,
+        right: 58,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+
+    textButtonCreate: {
+        fontSize: 18,
+        textAlign: 'center',
+        color: '#fff'
+    }
 });
 
 export default styles

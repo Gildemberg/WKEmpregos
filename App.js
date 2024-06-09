@@ -2,14 +2,14 @@ import { NavigationContainer } from "@react-navigation/native"
 import { createStackNavigator } from "@react-navigation/stack"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import Login from './src/screens/Login'
-import CriarUsuario from './src/screens/CriarUsuario'
-import CadastrarVeiculo from './src/screens/CadastrarVeiculo'
-import EditarVeiculo from './src/screens/EditarVeiculo'
-import Sobre from './src/screens/Sobre';
-import Conta from './src/screens/Conta';
-import Veiculos from "./src/screens/Veiculos";
-import InfoVeiculo from "./src/screens/InfoVeiculo";
+import TelaLogin from './src/screens/TelaLogin'
+import TelaCriarUsuario from './src/screens/TelaCriarUsuario'
+import TelaCadastrarVaga from './src/screens/TelaCadastrarVaga'
+import TelaEditarVaga from './src/screens/TelaEditarVaga'
+import TelaSobre from './src/screens/TelaSobre';
+import TelaConta from './src/screens/TelaConta';
+import TelaPrincipal from "./src/screens/TelaPrincipal";
+import TelaInformacoes from "./src/screens/TelaInformacoes";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -18,22 +18,22 @@ export default function App() {
     return (
         <NavigationContainer>
             <Stack.Navigator
-                initialRouteName="Login"
+                initialRouteName="TelaLogin"
                 screenOptions={{
                     headerTintColor: '#FFF',
                     headerTitleAlign: 'center',
-                    headerStyle: { backgroundColor: '#070A52' }
+                    headerStyle: { backgroundColor: '#6A5ACD' }
                 }}
             >
-                <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
+                <Stack.Screen name="TelaLogin" component={TelaLogin} options={{ headerShown: false }} />
 
-                <Stack.Screen name="CriarUsuario" component={CriarUsuario} options={{ title: 'Cadastro de Usuário'}} />
+                <Stack.Screen name="TelaCriarUsuario" component={TelaCriarUsuario} options={{ title: 'Cadastro de Usuário'}} />
 
-                <Stack.Screen name="CadastrarVeiculo" component={CadastrarVeiculo} options={{ title: 'Cadastro de Veículos'}} />
+                <Stack.Screen name="TelaCadastrarVaga" component={TelaCadastrarVaga} options={{ title: 'Cadastro de Vaga'}} />
 
-                <Stack.Screen name="EditarVeiculo" component={EditarVeiculo} options={{ title: 'Editar Veículo'}} />
+                <Stack.Screen name="TelaEditarVaga" component={TelaEditarVaga} options={{ title: 'Editar Veículo'}} />
 
-                <Stack.Screen name="InfoVeiculo" component={InfoVeiculo} options={{ title: 'Veículo'}} />
+                <Stack.Screen name="TelaInformacoes" component={TelaInformacoes} options={{ title: 'Informações da vaga'}} />
 
                 <Stack.Screen name="Tabs" component={Tabs} options={{ headerShown: false }} />
 
@@ -48,25 +48,25 @@ function Tabs() {
             screenOptions={{
                 tabBarActiveTintColor: "#fff", //Cor de ícones ativos
                 tabBarInactiveTintColor: "#fff", //Cor de ícones inativos
-                tabBarActiveBackgroundColor: '#4169E1',
+                tabBarActiveBackgroundColor: '#6A5ACD',
                 tabBarShowLabel: true,
-                tabBarStyle: { backgroundColor: '#070A52' },
+                tabBarStyle: { backgroundColor: '#836FFF' },
                 headerShown: true,
                 headerTintColor: '#FFF',
                 headerTitleAlign: 'center',
-                headerStyle: { backgroundColor: '#070A52' }
+                headerStyle: { backgroundColor: '#6A5ACD' }
             }}
         >
-            <Tab.Screen name="Veículos" component={Veiculos}
+            <Tab.Screen name="Vagas" component={TelaPrincipal}
                 options={{
                     tabBarIcon: ({ color }) => (
-                        <MaterialCommunityIcons name="car-back" color={color} size={32} />
+                        <MaterialCommunityIcons name="format-list-text" color={color} size={32} />
                     ),
                     tabBarLabel: () => null
                 }}
             />
             
-            <Tab.Screen name="Conta" component={Conta}
+            <Tab.Screen name="Conta" component={TelaConta}
                 options={{
                     tabBarIcon: ({ color }) => (
                         <MaterialCommunityIcons name="account" color={color} size={32} />
@@ -75,14 +75,14 @@ function Tabs() {
                 }}
             />
             
-            {/* <Tab.Screen name="Sobre" component={Sobre}
+            <Tab.Screen name="Sobre" component={TelaSobre}
                 options={{
                     tabBarIcon: ({ color }) => (
                         <MaterialCommunityIcons name="information-outline" color={color} size={32} />
                     ),
                     tabBarLabel: () => null
                 }}
-            /> */}
+            />
         </Tab.Navigator>
     );
 }

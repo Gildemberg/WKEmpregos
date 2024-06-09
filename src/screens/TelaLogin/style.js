@@ -1,30 +1,36 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from "react-native"
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: "#070A52",
+        backgroundColor: "#6A5ACD",
         padding: 30,
         flex: 1,
-        width: '100%',
         alignItems: 'center',
         justifyContent: 'center',
+        width: '100%'
+    },
+    logo: {
+        marginBottom: 50,
+        width: 300,
+        height: 250,
+        resizeMode: 'contain',
     },
     alert: {
         fontSize: 18,
-        textAlign: 'center',
         color: '#FFF',
+        textAlign: 'center',
         marginBottom: 20,
     },
     input: {
         fontSize: 18,
         borderRadius: 10,
-        backgroundColor: '#ddd',
+        backgroundColor: '#FFF',
         padding: 20,
         marginBottom: 20,
         width: '100%'
     },
     button: {
-        backgroundColor: '#4169E1',
+        backgroundColor: '#483D8B',
         padding: 10,
         borderRadius: 10,
         marginBottom: 20,
@@ -35,11 +41,19 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: '#fff'
     },
-    imagemSelecionada: {
-        width: 350, 
-        height: 200,
-        marginBottom: 20
+    buttonCreate: {
+        padding: 10,
+        borderWidth: 1,
+        borderColor: '#FFFFFF',
+        borderRadius: 10,
+        marginBottom: 20,
+        width: '100%'
+    },
+    buttonCreateText: {
+        fontSize: 18,
+        textAlign: 'center',
+        color: '#fff'
     }
-});
+})
 
 export default styles

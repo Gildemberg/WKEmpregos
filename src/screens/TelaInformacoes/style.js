@@ -7,36 +7,35 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff'
     },
 
-    tarefa: {
-        backgroundColor: "#ddd",
-        marginBottom: 10,
-        padding: 10,
-        borderRadius: 10,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        gap: 10,
-    },
-
-    action: {
-        flexDirection: 'row',
-        alignSelf: 'center',
-        marginTop: 20
-    },
-
     data: {
-        color: '#000'
+        fontSize: 15,
+        textAlign: 'right'
     },
 
-    descricao: {
-        fontSize: 40,
+    empresa: {
+        fontSize: 25,
+        marginBottom: 10
     },
     
-    valorVenda: {
-        fontSize: 40,
-        color: 'green',
+    funcao: {
+        fontSize: 25,
+        marginBottom: 10
+    },
+    
+    descricao: {
+        fontSize: 20,
+        marginBottom: 10,
+        textAlign: 'justify'
+    },
+    
+    tipo: {
+        fontSize: 25,
+        marginBottom: 10
+    },
+    
+    salario: {
+        fontSize: 25,
         fontWeight: 'bold',
-        textAlign: 'center'
     },
 
     buttonCreate: {
@@ -93,7 +92,13 @@ const styles = StyleSheet.create({
     },
     btnOpaco: {
         opacity: 0
-    }
+    },
+    
+    botoes: {
+        flexDirection: 'row',
+        alignSelf: 'flex-end',
+        marginTop: 20
+    },
 });
 
 export default styles
