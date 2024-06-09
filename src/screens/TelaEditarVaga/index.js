@@ -1,110 +1,65 @@
 import { firebase } from '../../services/firebaseConfig'
 import { getDatabase, onValue, ref, set } from "firebase/database";
 import { getAuth } from "firebase/auth";
-import * as ImagePicker from 'expo-image-picker';
-import { getStorage, ref as refS, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import styles from './style'
 const db = getDatabase();
 const auth = getAuth();
 
-export default function EditarVeiculo({ navigation, route }) {
-    const [dataVenda, setDataVenda] = useState("")
-    const [marca, setMarca] = useState("")
-    const [modelo, setModelo] = useState("")
-    const [ano, setAno] = useState("")
-    const [valor, setValor] = useState("")
-    const [urlImage, setUrlImage] = useState("")
-    const [image, setImage] = useState(null);
-    const [teste1, setTeste1] = useState(true);
-    const [errorEditarVenda, setErrorEditarVenda] = useState(null)
+export default function EditarVaga({ navigation, route }) {
+    const [empresa, setEmpresa] = useState("")
+    const [funcao, setFuncao] = useState("")
+    const [salario, setSalario] = useState("")
+    const [tipo, setTipo] = useState("")
+    const [desc, setDesc] = useState("")
+    const [errorEditarVaga, setErrorEditarVaga] = useState(null)
 
     const validar = () => {
-        if (dataVenda == "") {
-            setErrorEditarVenda("Informe a data da venda")
-        } else if (marca == "") {
-            setErrorEditarVenda("Informe a marca do veiculo")
-        } else if (modelo == "") {
-            setErrorEditarVenda("Informe o modelo do veiculo")
-        } else if (ano == "") {
-            setErrorEditarVenda("Informe o ano do veiculo")
-        } else if (valor == "") {
-            setErrorEditarVenda("Informe o valor da venda")
+        if (empresa == "") {
+            setErrorEditarVaga("Informe o nome da empresa")
+        } else if (funcao == "") {
+            setErrorEditarVaga("Informe a função")
+        } else if (salario == "") {
+            setErrorEditarVaga("Informe o salário")
+        } else if (tipo == "") {
+            setErrorEditarVaga("Informe o tipo do contrato")
+        } else if (desc == "") {
+            setErrorEditarVaga("Informe a descrição da vaga")
         } else {
-            setErrorEditarVenda(null)
-            cadastrarVenda()
+            setErrorEditarVaga(null)
+            editarVaga()
         }
     }
 
-    const cadastrarVenda = () => {
-        const taskListRef = ref(db, 'vendas/' + auth.currentUser.uid + '/' + route.params.id);
+    const editarVaga = () => {
+        const data = new Date().getTime();
+        const taskListRef = ref(db, 'vagas/' + auth.currentUser.uid + '/' + route.params.id);
         set(taskListRef, {
-            dataVenda: dataVenda,
-            marca: marca,
-            modelo: modelo,
-            ano: ano,
-            valor: valor,
-            urlImage: urlImage // Salva a URL da imagem no Realtime Database
+            data: data,
+            empresa: empresa,
+            funcao: funcao,
+            salario: salario,
+            tipo: tipo,
+            desc: desc
         })
             .then(() => {
-                console.log('Venda cadastrada com sucesso!');
+                console.log('Vaga editada com sucesso!');
                 navigation.navigate('Tabs');
             })
             .catch((error) => {
-                console.error('Erro ao cadastrar venda:', error);
-                setErrorEditarVenda('Erro ao cadastrar venda. Por favor, tente novamente.');
+                console.error('Erro ao editar vaga:', error);
+                setErrorEditarVaga('Erro ao editar vaga. Por favor, tente novamente.');
             });
     }
 
-    const selecionarImagem = async () => {
-        // Solicita permissões para acessar a galeria de fotos
-        const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-        if (status !== 'granted') {
-            alert('Desculpe, precisamos da permissão para acessar a galeria de fotos!');
-            return;
-        }
-
-        // Abre a galeria de fotos e permite ao usuário selecionar uma imagem
-        let result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.Images,
-            allowsEditing: true,
-            aspect: [4, 3],
-            quality: 1,
-        });
-
-        if (!result.canceled) {
-            setImage(result.assets[0].uri);
-            uploadImage(result.assets[0].uri);
-        }
-    };
-
-    const uploadImage = async (uri) => {
-        const storage = getStorage();
-        const response = await fetch(uri);
-        const blob = await response.blob();
-        const filename = uri.substring(uri.lastIndexOf('/') + 1);
-        const storageRef = refS(storage, filename);
-
-        try {
-            await uploadBytes(storageRef, blob);
-
-            const url = await getDownloadURL(storageRef);
-            setUrlImage(url);
-            setTeste1(false);
-        } catch (e) {
-            console.error(e);
-        }
-    };
-
     const recuperarDados = () => {
-        onValue(ref(db, 'vendas/' + auth.currentUser.uid + '/' + route.params.id), (snapshot) => {
-            setDataVenda(snapshot.val().dataVenda)
-            setModelo(snapshot.val().modelo)
-            setMarca(snapshot.val().marca)
-            setAno(snapshot.val().ano)
-            setValor(snapshot.val().valor)
-            setUrlImage(snapshot.val().urlImage)
+        onValue(ref(db, 'vagas/' + auth.currentUser.uid + '/' + route.params.id), (snapshot) => {
+            setEmpresa(snapshot.val().empresa)
+            setFuncao(snapshot.val().funcao)
+            setSalario(snapshot.val().salario)
+            setTipo(snapshot.val().tipo)
+            setDesc(snapshot.val().desc)
         });
     }
 
@@ -114,50 +69,44 @@ export default function EditarVeiculo({ navigation, route }) {
 
     return (
         <View style={styles.container}>
-            {errorEditarVenda != null && (
-                <Text style={styles.alert}>{errorEditarVenda}</Text>
+            {errorEditarVaga != null && (
+                <Text style={styles.alert}>{errorEditarVaga}</Text>
             )}
-
-            {teste1 && urlImage && <Image source={{ uri: urlImage }} style={styles.imagemSelecionada} />}
-            {image && <Image source={{ uri: image }} style={styles.imagemSelecionada} />}
-
-            <TouchableOpacity style={styles.button} onPress={selecionarImagem}>
-                <Text style={styles.textButton}>Selecionar Imagem</Text>
-            </TouchableOpacity>
+            <Image source={{uri: 'https://firebasestorage.googleapis.com/v0/b/wkempregos-81a16.appspot.com/o/logo3.png?alt=media&token=17310386-4730-4a54-ae97-392e060465f5'}} style={styles.logo} />
 
             <TextInput
                 style={styles.input}
-                placeholder='Data da Venda'
-                value={dataVenda}
-                onChangeText={setDataVenda}
+                placeholder='Empresa'
+                value={empresa}
+                onChangeText={setEmpresa}
             />
 
             <TextInput
                 style={styles.input}
-                placeholder='Marca'
-                value={marca}
-                onChangeText={setMarca}
+                placeholder='Função'
+                value={funcao}
+                onChangeText={setFuncao}
             />
 
             <TextInput
                 style={styles.input}
-                placeholder='Modelo'
-                value={modelo}
-                onChangeText={setModelo}
+                placeholder='Salário'
+                value={salario}
+                onChangeText={setSalario}
             />
 
             <TextInput
                 style={styles.input}
-                placeholder='Ano do Veículo'
-                value={ano}
-                onChangeText={setAno}
+                placeholder='CLT ou PJ'
+                value={tipo}
+                onChangeText={setTipo}
             />
 
             <TextInput
-                style={styles.input}
-                placeholder='Valor da Venda'
-                value={valor}
-                onChangeText={setValor}
+                style={[styles.input, { height: 100, textAlignVertical: 'top' }]}
+                placeholder='Descrição da Vaga'
+                value={desc}
+                onChangeText={setDesc}
             />
 
             <TouchableOpacity

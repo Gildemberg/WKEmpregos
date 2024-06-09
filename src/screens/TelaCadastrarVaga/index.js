@@ -34,7 +34,7 @@ export default function CadastrarVeiculo({ navigation }) {
     }
 
     const cadastrarVaga = () => {
-        const data = new Date().getMilliseconds();
+        const data = new Date().getTime();
         const vagaURL = dbRef(db, 'vagas/' + auth.currentUser.uid);
         const URL = push(vagaURL);
         set(URL, {
@@ -60,6 +60,8 @@ export default function CadastrarVeiculo({ navigation }) {
             {errorCadastrarVaga != null && (
                 <Text style={styles.alert}>{errorCadastrarVaga}</Text>
             )}
+            
+            <Image source={{uri: 'https://firebasestorage.googleapis.com/v0/b/wkempregos-81a16.appspot.com/o/logo3.png?alt=media&token=17310386-4730-4a54-ae97-392e060465f5'}} style={styles.logo} />
 
             <TextInput
                 style={styles.input}

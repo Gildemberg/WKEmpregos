@@ -17,7 +17,7 @@ export default function InfoVeiculo({ navigation, route }) {
     const [tipo, setTipo] = useState("")
     const [desc, setDesc] = useState("")
     const [status, setStatus] = useState("")
-    
+
     useEffect(() => {
         recuperarDados();
     }, [])
@@ -26,7 +26,18 @@ export default function InfoVeiculo({ navigation, route }) {
         onValue(ref(db, 'vagas/' + auth.currentUser.uid + '/' + route.params.id), (snapshot) => {
             const data = snapshot.val();
             if (data) {
-                setData(data.data || "")
+                const dataMili = data.data || "";
+                if(dataMili !== ""){
+                    const data = new Date(dataMili);
+                    // Formate a data no formato dd/mm/aaaa
+                    const dia = String(data.getDate()).padStart(2, '0');
+                    const mes = String(data.getMonth() + 1).padStart(2, '0');
+                    const ano = data.getFullYear();
+                    const dataFormatada = `${dia}/${mes}/${ano}`;
+                    setData(dataFormatada)
+                }else{
+                    setData("")
+                }
                 setEmpresa(data.empresa || "")
                 setFuncao(data.funcao || "")
                 setSalario(data.salario || "")
@@ -63,7 +74,7 @@ export default function InfoVeiculo({ navigation, route }) {
     };
 
     const vagaPreenchida = () => {
-        const data = new Date().getMilliseconds();
+        const data = new Date().getTime();
         const taskListRef = ref(db, 'vagas/' + auth.currentUser.uid + '/' + route.params.id);
         set(taskListRef, {
             data: data,

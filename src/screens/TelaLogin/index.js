@@ -39,7 +39,7 @@ export default function TelaLogin({ navigation }) {
 
     return (
         <View style={styles.container}>
-            <Image source={require('../../../assets/logo.jpg')} style={styles.logo} />
+            <Image source={{uri: 'https://firebasestorage.googleapis.com/v0/b/wkempregos-81a16.appspot.com/o/logo2.png?alt=media&token=06f41ca7-f9a0-4297-9cbc-5ccad30cfa59'}} style={styles.logo} />
             {errorLogin != null && (
                 <Text style={styles.alert}>{errorLogin}</Text>
             )}
